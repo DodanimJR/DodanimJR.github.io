@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Patrick Castillo · Customer Success Engineer / Software Developer</title>
+<meta name="description" content="Portafolio de Patrick Dodanim Castillo Flores: Customer Success Engineer y Software Developer en Costa Rica. Proyectos, experiencia en SaaS y CV.">
+<meta name="author" content="Patrick Dodanim Castillo Flores">
+<meta property="og:title" content="Patrick Castillo · Customer Success Engineer / Software Developer">
+<meta property="og:description" content="Conecto lo que el cliente necesita con lo que el equipo puede construir.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="shots/iglesia.webp">
+<meta name="theme-color" content="#4A306D">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: hero asimétrico (texto 1.25fr / ficha .75fr), proyectos en zig-zag con captura real, todo colapsa a una columna bajo 768px */
+:root{
+  --lavender:#E8D7F1; --thistle:#D3BCCC; --vintage:#A167A5; --indigo:#4A306D; --space:#0E273C;
+  --bg:#F6EEF9; --fg:#0E273C; --muted:#5B4A6B; --line:#D9C6DF; --frame:#FFFFFF;
+  --accent:#4A306D; --accent-ink:#F6EEF9; --accent-soft:#E8D7F1;
+  --shadow:0 24px 48px -24px rgba(74,48,109,.35);
+  --ease:cubic-bezier(.16,1,.3,1);
+  --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --body:"Figtree","Segoe UI",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0E273C; --fg:#E8D7F1; --muted:#BBA6C4; --line:#28405E; --frame:#163452;
+  --accent:#D3BCCC; --accent-ink:#0E273C; --accent-soft:#2A2F55;
+  --shadow:0 24px 48px -24px rgba(0,0,0,.6); color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0E273C; --fg:#E8D7F1; --muted:#BBA6C4; --line:#28405E; --frame:#163452;
+  --accent:#D3BCCC; --accent-ink:#0E273C; --accent-soft:#2A2F55;
+  --shadow:0 24px 48px -24px rgba(0,0,0,.6); color-scheme:dark }
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:17px;line-height:1.6;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+.wrap{max-width:1120px;margin:0 auto;padding-block:40px 72px;display:flex;flex-direction:column;gap:104px}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:6px}
+
+/* Barra superior */
+.top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:13px;color:var(--muted)}
+.top-right{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.top nav{display:flex;gap:22px}
+.top nav a{text-decoration:none;transition:color .3s var(--ease)}
+.top nav a:hover{color:var(--fg)}
+.status{display:inline-flex;align-items:center;gap:10px}
+.dot{position:relative;width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.dot::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--accent)}
+@media (prefers-reduced-motion:no-preference){
+  .dot::after{animation:pulse 2.4s var(--ease) infinite}
+  @keyframes pulse{0%{transform:scale(1);opacity:.6}70%,100%{transform:scale(3.2);opacity:0}}
+}
+
+/* Selector de idioma */
+.lang{position:relative;display:inline-grid;grid-template-columns:1fr 1fr;padding:3px;border:1.5px solid var(--line);border-radius:999px;background:transparent;cursor:pointer;
+  font-family:var(--mono);font-size:12px;font-weight:500;color:var(--muted);transition:transform .3s var(--ease),border-color .3s var(--ease)}
+.lang:hover{border-color:var(--accent)}
+.lang:active{transform:scale(.97)}
+.lang span{position:relative;z-index:1;padding:4px 11px;transition:color .3s var(--ease)}
+.lang::before{content:"";position:absolute;top:3px;bottom:3px;left:3px;width:calc(50% - 3px);border-radius:999px;background:var(--accent);transition:transform .35s var(--ease)}
+.lang[data-lang="en"]::before{transform:translateX(100%)}
+.lang[data-lang="es"] .es,.lang[data-lang="en"] .en{color:var(--accent-ink)}
+
+/* Hero asimétrico */
+.hero{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:56px;align-items:end}
+.hero-text{display:grid;gap:26px}
+.eyebrow{font-family:var(--mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(40px,5.6vw,64px);line-height:1;letter-spacing:-.03em;margin:0;text-wrap:balance}
+h1 span{font-weight:500;color:var(--muted)}
+.lede{max-width:56ch;font-size:clamp(17px,1.8vw,19px);color:var(--muted);margin:0}
+.lede strong{color:var(--fg);font-weight:600}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:12px 20px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;
+  border:1.5px solid var(--accent);transition:transform .3s var(--ease),background .3s var(--ease),color .3s var(--ease)}
+.btn:active{transform:scale(.98) translateY(1px)}
+.btn.primary{background:var(--accent);color:var(--accent-ink)}
+.btn.primary:hover{transform:translateY(-2px)}
+.btn.ghost:hover{background:var(--accent-soft)}
+.btn svg{width:18px;height:18px;fill:currentColor}
+.eyebrow .sep{opacity:.5;margin:0 .2em}
+.cv-msg{margin:0;font-family:var(--mono);font-size:12px;color:var(--muted)}
+
+/* Ficha técnica */
+.sheet{border-top:2px solid var(--fg);font-size:15px}
+.sheet dl{margin:0;display:grid}
+.sheet .row{display:grid;grid-template-columns:96px minmax(0,1fr);gap:12px;padding:13px 0;border-bottom:1px solid var(--line)}
+.sheet dt{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);padding-top:2px}
+.sheet dd{margin:0}
+.swatch{display:grid;grid-template-columns:repeat(5,1fr);height:8px;margin-top:18px;border-radius:2px;overflow:hidden}
+.swatch i:nth-child(1){background:var(--lavender)}.swatch i:nth-child(2){background:var(--thistle)}.swatch i:nth-child(3){background:var(--vintage)}.swatch i:nth-child(4){background:var(--indigo)}.swatch i:nth-child(5){background:var(--space)}
+
+/* Encabezados de sección */
+section{display:grid;gap:36px}
+.sec-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;border-bottom:1.5px solid var(--line);padding-bottom:14px}
+h2{font-family:var(--display);font-weight:700;font-size:clamp(28px,3.6vw,36px);letter-spacing:-.02em;margin:0;line-height:1.1}
+.sec-head .meta{font-family:var(--mono);font-size:13px;color:var(--muted)}
+
+/* Lo que hago */
+.duo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:48px}
+.role{display:grid;gap:12px;align-content:start;border-top:2px solid var(--fg);padding-top:20px}
+.role h3{font-family:var(--display);font-size:22px;margin:0;font-weight:700}
+.role p{margin:0;color:var(--muted);max-width:52ch}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tag{font-family:var(--mono);font-size:12px;padding:4px 10px;border-radius:6px;background:var(--accent-soft);color:var(--fg)}
+
+/* Proyectos en zig-zag */
+.projects{display:grid;gap:88px}
+.proj{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:48px;align-items:center}
+.proj:nth-child(even){grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr)}
+.proj:nth-child(even) .shot{order:2}
+.shot{display:block;text-decoration:none;border-radius:14px;overflow:hidden;background:var(--frame);border:1px solid var(--line);box-shadow:var(--shadow)}
+.shot .chrome{display:flex;align-items:center;gap:6px;padding:10px 14px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:11px;color:var(--muted)}
+.shot .chrome i{width:9px;height:9px;border-radius:50%;background:var(--line)}
+.shot .chrome span{margin-left:8px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.shot .img{overflow:hidden;aspect-ratio:16/10}
+.shot img{display:block;width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .7s var(--ease)}
+.shot:hover img{transform:scale(1.035)}
+.info{display:grid;gap:14px;align-content:center}
+.info .num{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.info h3{font-family:var(--display);font-size:clamp(26px,3vw,32px);font-weight:700;margin:0;letter-spacing:-.015em;line-height:1.1}
+.info p{margin:0;color:var(--muted)}
+.visit{justify-self:start;display:inline-flex;align-items:center;gap:8px;font-weight:600;text-decoration:none;font-size:15px;
+  border-bottom:1.5px solid var(--accent);padding-bottom:2px;transition:transform .3s var(--ease)}
+.visit:active{transform:scale(.98)}
+.visit .arr{display:inline-block;transition:transform .3s var(--ease)}
+.visit:hover .arr{transform:translate(3px,-3px)}
+
+/* Bevy: confidencial */
+.nda{position:relative;padding:clamp(24px,4vw,40px);border-radius:20px;background:#4A306D;color:#E8D7F1;display:grid;gap:14px;overflow:hidden}
+.nda .eyebrow{color:#D3BCCC}
+.nda h3{font-family:var(--display);font-size:clamp(24px,3.2vw,30px);margin:0;font-weight:700;line-height:1.15;text-wrap:balance;max-width:24ch}
+.nda p{margin:0;max-width:60ch;color:#D3BCCC}
+.declassified{display:grid;gap:10px;margin-top:8px}
+.dl-label{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#D3BCCC}
+.redacted{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+.redacted li{font-family:var(--mono);font-size:13px;padding:5px 12px;border-radius:4px;background:#A167A5;color:#0E273C;font-weight:500}
+.redacted li.bar{width:96px;background:#A167A5;opacity:.45}
+.redacted li.bar.short{width:56px}
+.stamp{position:absolute;top:22px;right:22px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  border:1.5px solid #D3BCCC;padding:4px 8px;border-radius:4px;transform:rotate(4deg)}
+
+/* Contacto */
+.contact{display:grid;gap:22px}
+.contact h2{font-size:clamp(30px,4.6vw,46px);text-wrap:balance;max-width:20ch}
+footer{font-family:var(--mono);font-size:12px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:1px solid var(--line);padding-top:20px}
+
+@media (prefers-reduced-motion:no-preference){
+  .stagger > *{animation:rise .8s var(--ease) both;animation-delay:calc(var(--i,0) * 80ms)}
+  @keyframes rise{from{transform:translateY(14px)}to{transform:none}}
+}
+
+@media (max-width:767px){
+  .wrap{gap:80px}
+  .hero,.duo,.proj,.proj:nth-child(even){grid-template-columns:minmax(0,1fr)}
+  .hero{gap:40px}
+  .proj{gap:24px}
+  .proj:nth-child(even) .shot{order:0}
+  .projects{gap:64px}
+  .stamp{position:static;justify-self:start;transform:none}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <span class="status"><span class="dot" aria-hidden="true"></span><span data-i18n="status">Costa Rica · abierto a conversar</span></span>
+    <div class="top-right">
+      <nav aria-label="Secciones">
+        <a href="#proyectos" data-i18n="nav.projects">Proyectos</a>
+        <a href="#ia" data-i18n="nav.ai">IA</a>
+        <a href="#contacto" data-i18n="nav.contact">Contacto</a>
+      </nav>
+      <button type="button" class="lang" id="lang-toggle" data-lang="es" aria-label="Cambiar idioma a inglés"><span class="es">ES</span><span class="en">EN</span></button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-text stagger">
+      <div class="eyebrow" style="--i:0">Customer Success Engineer <span class="sep">/</span> Software Developer</div>
+      <h1 style="--i:1">Patrick Dodanim <span>Castillo Flores</span></h1>
+      <p class="lede" style="--i:2" data-i18n-html="lede">Conecto lo que el cliente necesita con lo que el equipo puede construir. Vengo del <strong>desarrollo de software</strong>, así que cuando algo falla puedo leer el código, reproducir el problema y proponer la solución, no solo escalar el ticket.</p>
+      <div class="cta" style="--i:3">
+        <a class="btn primary" href="https://www.linkedin.com/in/patrick-dodanim-castillo-flores/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.06c.53-1 1.83-2.06 3.77-2.06 4.03 0 4.770 2.65 4.77 6.1V21h-4v-5.2c0-1.24-.02-2.84-1.73-2.84-1.73 0-2 1.35-2 2.75V21h-4z"/></svg>
+          LinkedIn</a>
+        <a class="btn ghost" href="https://github.com/DodanimJR" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.78 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>
+          GitHub</a>
+        <a class="btn ghost cv-link" href="cv/Patrick_Castillo_CV_ES.pdf" download>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 3h2v10.17l3.59-3.58L18 11l-6 6-6-6 1.41-1.41L11 13.17zM5 19h14v2H5z"/></svg>
+          <span data-i18n="cv">Descargar CV</span></a>
+      </div>
+      <p class="cv-msg" id="cv-msg" role="status" hidden></p>
+    </div>
+
+    <aside class="sheet" aria-label="Ficha">
+      <dl>
+        <div class="row"><dt data-i18n="sheet.role">Rol</dt><dd>Customer Success Engineer / Software Developer</dd></div>
+        <div class="row"><dt data-i18n="sheet.base">Base</dt><dd data-i18n="sheet.baseV">Desarrollo de software full stack</dd></div>
+        <div class="row"><dt data-i18n="sheet.now">Hoy</dt><dd data-i18n="sheet.nowV">Bevy, empresa SaaS (remoto, desde 2025)</dd></div>
+        <div class="row"><dt>Tickets</dt><dd data-i18n="sheet.ticketsV">+1,000 resueltos con alta satisfacción</dd></div>
+        <div class="row"><dt data-i18n="sheet.edu">Formación</dt><dd data-i18n="sheet.eduV">Lic. Ingeniería de Sistemas, UNADECA</dd></div>
+        <div class="row"><dt data-i18n="sheet.loc">Ubicación</dt><dd>Costa Rica</dd></div>
+      </dl>
+      <div class="swatch" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+    </aside>
+  </section>
+
+  <section aria-labelledby="hago">
+    <div class="sec-head"><h2 id="hago" data-i18n="do.title">Lo que hago</h2><span class="meta" data-i18n="do.meta">cliente y código</span></div>
+    <div class="duo">
+      <article class="role">
+        <h3 data-i18n="do.cs">Éxito del cliente</h3>
+        <p data-i18n="do.csP">En Bevy, una plataforma SaaS, resuelvo de principio a fin los casos técnicos críticos de los clientes: reproduzco bugs, hago análisis de causa raíz para ingeniería y convierto patrones de soporte en información para el roadmap de producto.</p>
+        <div class="tags"><span class="tag">Onboarding</span><span class="tag" data-i18n="tag.support">Soporte técnico</span><span class="tag" data-i18n="tag.rca">Causa raíz</span><span class="tag" data-i18n="tag.feedback">Feedback a producto</span></div>
+      </article>
+      <article class="role">
+        <h3 data-i18n="do.dev">Desarrollo de software</h3>
+        <p data-i18n="do.devP">Construyo backend y frontend, escribo scripts y configuraciones a la medida, despliego en servidores físicos y contenedores, y adapto plataformas existentes a lo que cada organización necesita.</p>
+        <div class="tags"><span class="tag">JavaScript</span><span class="tag">Python</span><span class="tag">Java</span><span class="tag">Linux</span><span class="tag">Docker</span><span class="tag">Git</span></div>
+      </article>
+    </div>
+  </section>
+
+  <section id="proyectos" aria-labelledby="proy">
+    <div class="sec-head"><h2 id="proy" data-i18n="proj.title">Proyectos</h2><span class="meta" data-i18n="proj.meta">en producción</span></div>
+    <div class="projects">
+
+      <article class="proj">
+        <a class="shot" href="https://iglesia.unadeca.net/" target="_blank" rel="noopener" aria-label="Iglesia UNADECA">
+          <div class="chrome"><i></i><i></i><i></i><span>iglesia.unadeca.net</span></div>
+          <div class="img"><img src="shots/iglesia.webp" alt="Iglesia UNADECA: transcripción y traducción en vivo" loading="lazy" width="1120" height="700"></div>
+        </a>
+        <div class="info">
+          <span class="num">Backend + Frontend</span>
+          <h3>Iglesia UNADECA</h3>
+          <p data-i18n="p1">Sistema de transcripción del culto y traducción en tiempo real. El backend procesa el audio y genera el texto; el frontend lo muestra en vivo en español e inglés, con ajuste de tamaño de letra y modo oscuro para quien lo sigue desde su teléfono.</p>
+          <div class="tags"><span class="tag" data-i18n="tag.live">Transcripción en vivo</span><span class="tag" data-i18n="tag.trans">Traducción ES→EN</span><span class="tag" data-i18n="tag.rt">Tiempo real</span></div>
+          <a class="visit" href="https://iglesia.unadeca.net/" target="_blank" rel="noopener"><span data-i18n="visit">Ver proyecto</span> <span class="arr" aria-hidden="true">↗</span></a>
+        </div>
+      </article>
+
+      <article class="proj">
+        <a class="shot" href="https://repositorio.unadeca.ac.cr/home" target="_blank" rel="noopener" aria-label="Repositorio UNADECA">
+          <div class="chrome"><i></i><i></i><i></i><span>repositorio.unadeca.ac.cr</span></div>
+          <div class="img"><img src="shots/repositorio.webp" alt="Repositorio institucional de UNADECA en DSpace" loading="lazy" width="1120" height="700"></div>
+        </a>
+        <div class="info">
+          <span class="num" data-i18n="p2k">DSpace · Infraestructura</span>
+          <h3 data-i18n="p2t">Repositorio UNADECA</h3>
+          <p data-i18n="p2">Repositorio institucional de la universidad. Hice el despliegue de DSpace, lo personalicé con la identidad de UNADECA y lo publiqué en un servidor físico de la institución.</p>
+          <div class="tags"><span class="tag">DSpace</span><span class="tag">Deploy</span><span class="tag" data-i18n="tag.custom">Customización</span><span class="tag" data-i18n="tag.bare">Servidor físico</span></div>
+          <a class="visit" href="https://repositorio.unadeca.ac.cr/home" target="_blank" rel="noopener"><span data-i18n="visit">Ver proyecto</span> <span class="arr" aria-hidden="true">↗</span></a>
+        </div>
+      </article>
+
+      <article class="proj">
+        <a class="shot" href="https://teknika.co.cr/" target="_blank" rel="noopener" aria-label="TeknikaCR">
+          <div class="chrome"><i></i><i></i><i></i><span>teknika.co.cr</span></div>
+          <div class="img"><img src="shots/teknika.webp" alt="Página de inicio de TeknikaCR" loading="lazy" width="1120" height="700"></div>
+        </a>
+        <div class="info">
+          <span class="num" data-i18n="p3k">Sitio web</span>
+          <h3>TeknikaCR</h3>
+          <p data-i18n="p3">Sitio de TeknikaCR, firma costarricense de asesoría y capacitación en inteligencia artificial, desarrollo web y soporte para profesionales y PYMEs.</p>
+          <div class="tags"><span class="tag" data-i18n="tag.web">Desarrollo web</span><span class="tag" data-i18n="nav.ai">IA</span></div>
+          <a class="visit" href="https://teknika.co.cr/" target="_blank" rel="noopener"><span data-i18n="visit">Ver proyecto</span> <span class="arr" aria-hidden="true">↗</span></a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section id="ia" aria-labelledby="bevy">
+    <div class="nda">
+      <span class="stamp" data-i18n="nda.stamp">Confidencial</span>
+      <span class="eyebrow" data-i18n="nda.eyebrow">Bevy · SaaS · Proyectos internos</span>
+      <h3 id="bevy" data-i18n="nda.title">Herramientas de IA para el equipo de Bevy</h3>
+      <p data-i18n="nda.p">Participo en proyectos internos de inteligencia artificial en Bevy, empresa SaaS, enfocados en mejorar el trabajo de los equipos y la experiencia de los clientes. Por acuerdos de confidencialidad no puedo publicar el código ni los detalles, pero con gusto converso sobre el enfoque y lo aprendido.</p>
+      <div class="declassified">
+        <span class="dl-label" data-i18n="nda.stack">Lo que sí puedo contar</span>
+        <ul class="redacted" aria-label="Tecnologías">
+          <li>APIs</li><li>Scripting</li><li>TypeScript</li><li>Python</li><li>Bash</li><li>Git</li><li>Jira</li><li class="bar" aria-hidden="true"></li><li class="bar short" aria-hidden="true"></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto" class="contact" aria-labelledby="hablemos">
+    <span class="eyebrow" data-i18n="nav.contact">Contacto</span>
+    <h2 id="hablemos" data-i18n="c.title">¿Tu equipo necesita a alguien que hable cliente y código?</h2>
+    <div class="cta">
+      <a class="btn primary" href="https://www.linkedin.com/in/patrick-dodanim-castillo-flores/" target="_blank" rel="noopener" data-i18n="c.li">Escríbeme en LinkedIn</a>
+      <a class="btn ghost cv-link" href="cv/Patrick_Castillo_CV_ES.pdf" download><span data-i18n="cv.pdf">CV en PDF</span></a>
+      <a class="btn ghost" href="https://github.com/DodanimJR" target="_blank" rel="noopener">github.com/DodanimJR</a>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 Patrick Dodanim Castillo Flores</span>
+    <span data-i18n="foot">HTML estático</span>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var EN = {
+    "status":"Costa Rica · open to talk",
+    "nav.projects":"Projects","nav.ai":"AI","nav.contact":"Contact",
+    "lede":"I connect what customers need with what the team can build. I come from <strong>software development</strong>, so when something breaks I can read the code, reproduce the issue and propose the fix, not just escalate the ticket.",
+    "sheet.role":"Role","sheet.base":"Background","sheet.baseV":"Full stack software development",
+    "sheet.now":"Now","sheet.nowV":"Bevy, a SaaS company (remote, since 2025)","sheet.loc":"Location",
+    "sheet.ticketsV":"1,000+ resolved with high satisfaction","sheet.edu":"Education","sheet.eduV":"B.S. Systems Engineering, UNADECA",
+    "cv":"Download CV","cv.pdf":"CV as PDF",
+    "do.title":"What I do","do.meta":"customers and code",
+    "do.cs":"Customer success","do.csP":"At Bevy, a SaaS platform, I own critical customer technical issues end to end: I reproduce bugs, run root cause analysis for engineering and turn support patterns into input for the product roadmap.",
+    "do.dev":"Software development","do.devP":"I build backend and frontend, write custom scripts and configurations, deploy to physical servers and containers, and adapt existing platforms to what each organization needs.",
+    "tag.support":"Technical support","tag.rca":"Root cause","tag.feedback":"Product feedback","tag.servers":"Servers",
+    "proj.title":"Projects","proj.meta":"in production",
+    "p1":"Live transcription and real-time translation for church services. The backend processes the audio and produces the text; the frontend shows it live in Spanish and English, with adjustable text size and dark mode for people following along on their phones.",
+    "tag.live":"Live transcription","tag.trans":"ES→EN translation","tag.rt":"Real time","visit":"View project",
+    "p2k":"DSpace · Infrastructure","p2t":"UNADECA Repository",
+    "p2":"The university's institutional repository. I deployed DSpace, customized it with UNADECA's identity and published it on the institution's own physical server.",
+    "tag.custom":"Customization","tag.bare":"Physical server",
+    "p3k":"Website","p3":"Website for TeknikaCR, a Costa Rican firm offering AI consulting and training, web development and support for professionals and small businesses.",
+    "tag.web":"Web development",
+    "nda.stamp":"Confidential","nda.stack":"What I can share","nda.eyebrow":"Bevy · SaaS · Internal projects","nda.title":"AI tools for the Bevy team",
+    "nda.p":"I work on internal artificial intelligence projects at Bevy, a SaaS company, focused on improving how teams work and the customer experience. Confidentiality agreements keep me from publishing the code or details, but I'm happy to talk about the approach and what I learned.",
+    "c.title":"Does your team need someone who speaks both customer and code?","c.li":"Message me on LinkedIn",
+    "foot":"Static HTML"
+  };
+  var ES = {};
+  document.querySelectorAll("[data-i18n]").forEach(function(el){ ES[el.dataset.i18n] = el.textContent; });
+  document.querySelectorAll("[data-i18n-html]").forEach(function(el){ ES[el.dataset.i18nHtml] = el.innerHTML; });
+
+  var btn = document.getElementById("lang-toggle");
+  function apply(lang){
+    var d = lang === "en" ? EN : ES;
+    document.querySelectorAll("[data-i18n]").forEach(function(el){ var v = d[el.dataset.i18n]; if (v != null) el.textContent = v; });
+    document.querySelectorAll("[data-i18n-html]").forEach(function(el){ var v = d[el.dataset.i18nHtml]; if (v != null) el.innerHTML = v; });
+    document.documentElement.lang = lang;
+    btn.dataset.lang = lang;
+    btn.setAttribute("aria-label", lang === "en" ? "Switch language to Spanish" : "Cambiar idioma a inglés");
+    try { localStorage.setItem("lang", lang); } catch(e){}
+  }
+  var saved = null;
+  try { saved = localStorage.getItem("lang"); } catch(e){}
+  apply(saved === "en" ? "en" : "es");
+  btn.addEventListener("click", function(){ apply(btn.dataset.lang === "es" ? "en" : "es"); });
+  /* CV: archivo según idioma; usa la descarga del visor si existe, si no abre el PDF */
+  var CV = { es: "cv/Patrick_Castillo_CV_ES.pdf", en: "cv/Patrick_Castillo_CV_EN.pdf" };
+  var MSG = { es: { fail: "No se pudo descargar. Se abrirá el PDF en una pestaña nueva." }, en: { fail: "Download failed. The PDF will open in a new tab." } };
+  function curLang(){ return btn.dataset.lang === "en" ? "en" : "es"; }
+  function syncCv(){ document.querySelectorAll(".cv-link").forEach(function(a){ a.href = CV[curLang()]; }); }
+  syncCv();
+  btn.addEventListener("click", syncCv);
+  var dl = null;
+  if (window.claude && window.claude.use) { window.claude.use("downloads").then(function(ns){ dl = ns; }).catch(function(){}); }
+  var msg = document.getElementById("cv-msg");
+  document.querySelectorAll(".cv-link").forEach(function(a){
+    a.addEventListener("click", function(ev){
+      if (!dl) return; /* sin capacidad: el enlace abre el PDF */
+      ev.preventDefault();
+      var lang = curLang(), path = CV[lang];
+      fetch(path).then(function(r){ if (!r.ok) throw new Error(r.status); return r.blob(); })
+        .then(function(blob){ return dl.save({ filename: path.split("/").pop(), data: blob }); })
+        .then(function(){ msg.hidden = true; })
+        .catch(function(err){
+          if (err && err.code === "declined") return;
+          if (err && err.code === "rate_limited") return;
+          msg.textContent = MSG[lang].fail; msg.hidden = false;
+          window.open(path, "_blank", "noopener");
+        });
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
