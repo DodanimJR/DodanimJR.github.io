@@ -149,6 +149,17 @@ h2{font-family:var(--display);font-weight:700;font-size:clamp(28px,3.6vw,36px);l
 .contact h2{font-size:clamp(30px,4.6vw,46px);text-wrap:balance;max-width:20ch}
 footer{font-family:var(--mono);font-size:12px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:1px solid var(--line);padding-top:20px}
 
+
+/* Certificaciones */
+.badges{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px}
+.badge{display:grid;grid-template-columns:96px minmax(0,1fr);gap:18px;align-items:center;text-decoration:none;padding-top:20px;border-top:1px solid var(--line)}
+.badge img{width:96px;height:96px;object-fit:contain;transition:transform .4s var(--ease)}
+.badge:hover img{transform:translateY(-3px) rotate(-2deg)}
+.badge:active{transform:scale(.99)}
+.badge h3{font-family:var(--display);font-size:18px;font-weight:700;margin:0;line-height:1.2}
+.badge .iss{font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:4px}
+.badge .ver{display:inline-flex;gap:6px;margin-top:8px;font-size:14px;font-weight:600;border-bottom:1.5px solid var(--accent);padding-bottom:1px}
+@media (max-width:900px){.badges{grid-template-columns:minmax(0,1fr)}}
 @media (prefers-reduced-motion:no-preference){
   .stagger > *{animation:rise .8s var(--ease) both;animation-delay:calc(var(--i,0) * 80ms)}
   @keyframes rise{from{transform:translateY(14px)}to{transform:none}}
@@ -277,6 +288,24 @@ footer{font-family:var(--mono);font-size:12px;color:var(--muted);display:flex;ju
     </div>
   </section>
 
+  <section id="certificaciones" aria-labelledby="cert">
+    <div class="sec-head"><h2 id="cert" data-i18n="cert.title">Certificaciones</h2><span class="meta" data-i18n="cert.meta">verificables en Credly</span></div>
+    <div class="badges">
+      <a class="badge" href="https://www.credly.com/badges/7c36f3a3-a4dd-4661-93bf-cbf7364b86d7/public_url" target="_blank" rel="noopener">
+        <img src="badges/ccna.webp" alt="Badge CCNA: Introduction to Networks" width="96" height="96" loading="lazy">
+        <div><h3>CCNA: Introduction to Networks</h3><div class="iss">Cisco Networking Academy</div><span class="ver"><span data-i18n="cert.verify">Verificar</span> <span aria-hidden="true">↗</span></span></div>
+      </a>
+      <a class="badge" href="https://www.credly.com/badges/2b252c29-d7a2-4e3e-8a36-00ffbddf93c8/public_url" target="_blank" rel="noopener">
+        <img src="badges/netess.webp" alt="Badge Networking Essentials" width="96" height="96" loading="lazy">
+        <div><h3>Networking Essentials</h3><div class="iss">Cisco Networking Academy</div><span class="ver"><span data-i18n="cert.verify">Verificar</span> <span aria-hidden="true">↗</span></span></div>
+      </a>
+      <a class="badge" href="https://www.credly.com/badges/cb244fc2-5216-4a97-8f2e-489367bc3e20/public_url" target="_blank" rel="noopener">
+        <img src="badges/snowflake.webp" alt="Badge Hands On Essentials: Data Warehouse" width="96" height="96" loading="lazy">
+        <div><h3>Hands On Essentials: Data Warehouse</h3><div class="iss">Snowflake</div><span class="ver"><span data-i18n="cert.verify">Verificar</span> <span aria-hidden="true">↗</span></span></div>
+      </a>
+    </div>
+  </section>
+
   <section id="ia" aria-labelledby="bevy">
     <div class="nda">
       <span class="stamp" data-i18n="nda.stamp">Confidencial</span>
@@ -330,7 +359,7 @@ footer{font-family:var(--mono);font-size:12px;color:var(--muted);display:flex;ju
     "tag.custom":"Customization","tag.bare":"Physical server",
     "p3k":"Website","p3":"Website for TeknikaCR, a Costa Rican firm offering AI consulting and training, web development and support for professionals and small businesses.",
     "tag.web":"Web development",
-    "nda.stamp":"Confidential","nda.stack":"What I can share","nda.eyebrow":"Bevy · SaaS · Internal projects","nda.title":"AI tools for the Bevy team",
+    "cert.title":"Certifications","cert.meta":"verifiable on Credly","cert.verify":"Verify","nda.stamp":"Confidential","nda.stack":"What I can share","nda.eyebrow":"Bevy · SaaS · Internal projects","nda.title":"AI tools for the Bevy team",
     "nda.p":"I work on internal artificial intelligence projects at Bevy, a SaaS company, focused on improving how teams work and the customer experience. Confidentiality agreements keep me from publishing the code or details, but I'm happy to talk about the approach and what I learned.",
     "c.title":"Does your team need someone who speaks both customer and code?","c.li":"Message me on LinkedIn",
     "foot":"Static HTML"
