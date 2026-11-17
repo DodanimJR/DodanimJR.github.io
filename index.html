@@ -43,7 +43,9 @@
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:17px;line-height:1.6;
   padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
-.wrap{max-width:1120px;margin:0 auto;padding-block:40px 72px;display:flex;flex-direction:column;gap:104px}
+.wrap{max-width:1120px;margin:0 auto;padding-block:20px 72px;display:flex;flex-direction:column;gap:104px}
+.hero + .facts{margin-top:-56px}
+.top + .hero{margin-top:-48px}
 a{color:inherit}
 a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:6px}
 
@@ -72,10 +74,54 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 .lang[data-lang="es"] .es,.lang[data-lang="en"] .en{color:var(--accent-ink)}
 
 /* Hero asimétrico */
-.hero{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:56px;align-items:end}
+.hero{position:relative;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:64px;align-items:center;padding-block:24px 8px}
+.hero-text{position:relative;z-index:1}
+#lines{position:absolute;z-index:0;top:-120px;right:max(-16px, calc((100vw - 1120px) / -2));width:min(100vw, 1400px);height:calc(100% + 200px);pointer-events:none}
+.photo-wrap{position:relative;z-index:1;justify-self:end;width:100%;max-width:380px}
+.photo{position:relative;aspect-ratio:4/5;border-radius:28px;overflow:hidden;background:#E2C4A3;
+  box-shadow:0 40px 80px -40px rgba(60,38,18,.55),inset 0 0 0 1px rgba(255,255,255,.25)}
+.photo img{width:100%;height:100%;object-fit:cover;object-position:50% 18%;mix-blend-mode:multiply;filter:saturate(.9) contrast(1.04);transform:scale(1.12);transform-origin:50% 30%}
+.chip{position:absolute;display:inline-flex;align-items:center;gap:8px;padding:8px 13px;border-radius:999px;font-family:var(--mono);font-size:12px;
+  background:color-mix(in srgb,var(--bg) 78%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border:1px solid color-mix(in srgb,var(--fg) 12%,transparent);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 12px 24px -12px rgba(0,0,0,.35);color:var(--fg);white-space:nowrap}
+.chip b{font-weight:500;color:var(--accent)}
+.chip.c1{left:-28px;bottom:56px}
+.chip.c2{right:-14px;top:28px}
+@media (prefers-reduced-motion:no-preference){
+  .chip.c1{animation:float 6s ease-in-out infinite}
+  .chip.c2{animation:float 7s ease-in-out infinite reverse}
+  @keyframes float{50%{transform:translateY(-6px)}}
+}
+/* Franja de datos */
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-block:1px solid var(--line)}
+.fact{padding:22px 24px;display:grid;gap:6px;border-left:1px solid var(--line)}
+.fact:first-child{border-left:0;padding-left:0}
+.fact dt{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.fact dd{margin:0;font-family:var(--display);font-weight:700;font-size:20px;letter-spacing:-.01em;line-height:1.2;font-variant-numeric:tabular-nums}
+.fact dd small{display:block;font-family:var(--body);font-weight:400;font-size:14px;color:var(--muted);letter-spacing:0;margin-top:2px}
+/* Barra fija tipo vidrio */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;margin-inline:-20px;padding:12px 20px;border-radius:999px;
+  background:color-mix(in srgb,var(--bg) 72%,transparent);backdrop-filter:blur(14px) saturate(1.2);-webkit-backdrop-filter:blur(14px) saturate(1.2);
+  border:1px solid transparent;transition:border-color .4s var(--ease),box-shadow .4s var(--ease)}
+.top.scrolled{border-color:color-mix(in srgb,var(--fg) 10%,transparent);box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 16px 32px -24px rgba(0,0,0,.45)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:21;background:var(--bg)}
+/* Grano fijo */
+body::after{content:"";position:fixed;inset:0;z-index:50;pointer-events:none;opacity:.05;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+/* Borde iluminado en capturas */
+.shot{position:relative}
+.shot::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .4s var(--ease);
+  background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--accent) 22%,transparent),transparent 60%)}
+.shot:hover::after{opacity:1}
+/* Aparición al hacer scroll: solo transform, el contenido siempre visible */
+@media (prefers-reduced-motion:no-preference){
+  .js .reveal{transform:translateY(22px);transition:transform .9s var(--ease)}
+  .js .reveal.in{transform:none}
+}
+.btn.primary{will-change:transform}
 .hero-text{display:grid;gap:26px}
 .eyebrow{font-family:var(--mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-h1{font-family:var(--display);font-weight:800;font-size:clamp(40px,5.6vw,64px);line-height:1;letter-spacing:-.03em;margin:0;text-wrap:balance}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(40px,5.2vw,60px);line-height:.98;letter-spacing:-.035em;margin:0;text-wrap:balance}
 h1 span{font-weight:500;color:var(--muted)}
 .lede{max-width:56ch;font-size:clamp(17px,1.8vw,19px);color:var(--muted);margin:0}
 .lede strong{color:var(--fg);font-weight:600}
@@ -91,13 +137,6 @@ h1 span{font-weight:500;color:var(--muted)}
 .cv-msg{margin:0;font-family:var(--mono);font-size:12px;color:var(--muted)}
 
 /* Ficha técnica */
-.sheet{border-top:2px solid var(--fg);font-size:15px}
-.sheet dl{margin:0;display:grid}
-.sheet .row{display:grid;grid-template-columns:96px minmax(0,1fr);gap:12px;padding:13px 0;border-bottom:1px solid var(--line)}
-.sheet dt{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);padding-top:2px}
-.sheet dd{margin:0}
-.swatch{display:grid;grid-template-columns:repeat(5,1fr);height:8px;margin-top:18px;border-radius:2px;overflow:hidden}
-.swatch i:nth-child(1){background:var(--lavender)}.swatch i:nth-child(2){background:var(--thistle)}.swatch i:nth-child(3){background:var(--vintage)}.swatch i:nth-child(4){background:var(--indigo)}.swatch i:nth-child(5){background:var(--space)}
 
 /* Encabezados de sección */
 section{display:grid;gap:36px}
@@ -174,6 +213,17 @@ footer{font-family:var(--mono);font-size:12px;color:var(--muted);display:flex;ju
   .wrap{gap:80px}
   .hero,.duo,.proj,.proj:nth-child(even){grid-template-columns:minmax(0,1fr)}
   .hero{gap:40px}
+  .photo-wrap{justify-self:center;max-width:240px;order:-1}
+  #lines{display:none}
+  .top nav{display:none}
+  .top{flex-wrap:nowrap}
+  .top + .hero{margin-top:-40px}
+  .chip.c1{left:-10px}.chip.c2{right:-6px}
+  .facts{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .fact{padding:18px 16px}.fact:nth-child(3){border-left:0;padding-left:0}
+  .fact:nth-child(n+3){border-top:1px solid var(--line)}
+  .hero + .facts{margin-top:-40px}
+  .top{margin-inline:-8px;padding:10px 12px;border-radius:20px}
   .proj{gap:24px}
   .proj:nth-child(even) .shot{order:0}
   .projects{gap:64px}
@@ -215,20 +265,22 @@ footer{font-family:var(--mono);font-size:12px;color:var(--muted);display:flex;ju
       <p class="cv-msg" id="cv-msg" role="status" hidden></p>
     </div>
 
-    <aside class="sheet" aria-label="Ficha">
-      <dl>
-        <div class="row"><dt data-i18n="sheet.role">Rol</dt><dd>Customer Success Engineer / Software Developer</dd></div>
-        <div class="row"><dt data-i18n="sheet.base">Base</dt><dd data-i18n="sheet.baseV">Desarrollo de software full stack</dd></div>
-        <div class="row"><dt data-i18n="sheet.now">Hoy</dt><dd data-i18n="sheet.nowV">Bevy, empresa SaaS (remoto, desde 2025)</dd></div>
-        <div class="row"><dt>Tickets</dt><dd data-i18n="sheet.ticketsV">+1,000 resueltos con alta satisfacción</dd></div>
-        <div class="row"><dt data-i18n="sheet.edu">Formación</dt><dd data-i18n="sheet.eduV">Lic. Ingeniería de Sistemas, UNADECA</dd></div>
-        <div class="row"><dt data-i18n="sheet.loc">Ubicación</dt><dd>Costa Rica</dd></div>
-      </dl>
-      <div class="swatch" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-    </aside>
+    <div class="photo-wrap">
+      <div class="photo"><img src="photo.webp" alt="Patrick Dodanim Castillo Flores" width="720" height="720" fetchpriority="high"></div>
+      <span class="chip c1"><b>Bevy</b> · SaaS · <span data-i18n="chip.remote">remoto</span></span>
+      <span class="chip c2"><b>1,000+</b> tickets</span>
+    </div>
+    <canvas id="lines" aria-hidden="true"></canvas>
   </section>
 
-  <section aria-labelledby="hago">
+  <dl class="facts reveal" aria-label="Ficha">
+    <div class="fact"><dt data-i18n="sheet.now">Hoy</dt><dd>Bevy<small data-i18n="fact.bevy">Empresa SaaS · desde 2025</small></dd></div>
+    <div class="fact"><dt>Tickets</dt><dd>1,000+<small data-i18n="fact.tickets">Resueltos con alta satisfacción</small></dd></div>
+    <div class="fact"><dt data-i18n="sheet.edu">Formación</dt><dd><span data-i18n="fact.edu">Ing. de Sistemas</span><small>UNADECA · CPIC</small></dd></div>
+    <div class="fact"><dt data-i18n="fact.langT">Idiomas</dt><dd>ES / EN<small data-i18n="fact.lang">Ex intérprete profesional</small></dd></div>
+  </dl>
+
+  <section aria-labelledby="hago" class="reveal">
     <div class="sec-head"><h2 id="hago" data-i18n="do.title">Lo que hago</h2><span class="meta" data-i18n="do.meta">cliente y código</span></div>
     <div class="duo">
       <article class="role">
@@ -248,7 +300,7 @@ footer{font-family:var(--mono);font-size:12px;color:var(--muted);display:flex;ju
     <div class="sec-head"><h2 id="proy" data-i18n="proj.title">Proyectos</h2><span class="meta" data-i18n="proj.meta">en producción</span></div>
     <div class="projects">
 
-      <article class="proj">
+      <article class="proj reveal">
         <a class="shot" href="https://iglesia.unadeca.net/" target="_blank" rel="noopener" aria-label="Iglesia UNADECA">
           <div class="chrome"><i></i><i></i><i></i><span>iglesia.unadeca.net</span></div>
           <div class="img"><img src="shots/iglesia.webp" alt="Iglesia UNADECA: transcripción y traducción en vivo" loading="lazy" width="1120" height="700"></div>
@@ -262,7 +314,7 @@ footer{font-family:var(--mono);font-size:12px;color:var(--muted);display:flex;ju
         </div>
       </article>
 
-      <article class="proj">
+      <article class="proj reveal">
         <a class="shot" href="https://repositorio.unadeca.ac.cr/home" target="_blank" rel="noopener" aria-label="Repositorio UNADECA">
           <div class="chrome"><i></i><i></i><i></i><span>repositorio.unadeca.ac.cr</span></div>
           <div class="img"><img src="shots/repositorio.webp" alt="Repositorio institucional de UNADECA en DSpace" loading="lazy" width="1120" height="700"></div>
@@ -276,7 +328,7 @@ footer{font-family:var(--mono);font-size:12px;color:var(--muted);display:flex;ju
         </div>
       </article>
 
-      <article class="proj">
+      <article class="proj reveal">
         <a class="shot" href="https://teknika.co.cr/" target="_blank" rel="noopener" aria-label="TeknikaCR">
           <div class="chrome"><i></i><i></i><i></i><span>teknika.co.cr</span></div>
           <div class="img"><img src="shots/teknika.webp" alt="Página de inicio de TeknikaCR" loading="lazy" width="1120" height="700"></div>
@@ -295,7 +347,7 @@ footer{font-family:var(--mono);font-size:12px;color:var(--muted);display:flex;ju
 
   <section id="certificaciones" aria-labelledby="cert">
     <div class="sec-head"><h2 id="cert" data-i18n="cert.title">Certificaciones</h2><span class="meta" data-i18n="cert.meta">verificables en Credly</span></div>
-    <div class="badges">
+    <div class="badges reveal">
       <a class="badge" href="https://www.credly.com/badges/7c36f3a3-a4dd-4661-93bf-cbf7364b86d7/public_url" target="_blank" rel="noopener">
         <img src="badges/ccna.webp" alt="Badge CCNA: Introduction to Networks" width="96" height="96" loading="lazy">
         <div><h3>CCNA: Introduction to Networks</h3><div class="iss">Cisco Networking Academy</div><span class="ver"><span data-i18n="cert.verify">Verificar</span> <span aria-hidden="true">↗</span></span></div>
@@ -312,7 +364,7 @@ footer{font-family:var(--mono);font-size:12px;color:var(--muted);display:flex;ju
   </section>
 
   <section id="ia" aria-labelledby="bevy">
-    <div class="nda">
+    <div class="nda reveal">
       <span class="stamp" data-i18n="nda.stamp">Confidencial</span>
       <span class="eyebrow" data-i18n="nda.eyebrow">Bevy · SaaS · Proyectos internos</span>
       <h3 id="bevy" data-i18n="nda.title">Herramientas de IA para el equipo de Bevy</h3>
@@ -350,7 +402,7 @@ footer{font-family:var(--mono);font-size:12px;color:var(--muted);display:flex;ju
     "lede":"I connect what customers need with what the team can build. I come from <strong>software development</strong>, so when something breaks I can read the code, reproduce the issue and propose the fix, not just escalate the ticket.",
     "sheet.role":"Role","sheet.base":"Background","sheet.baseV":"Full stack software development",
     "sheet.now":"Now","sheet.nowV":"Bevy, a SaaS company (remote, since 2025)","sheet.loc":"Location",
-    "sheet.ticketsV":"1,000+ resolved with high satisfaction","sheet.edu":"Education","sheet.eduV":"B.S. Systems Engineering, UNADECA",
+    "sheet.ticketsV":"1,000+ resolved with high satisfaction","chip.remote":"remote","fact.bevy":"SaaS company · since 2025","fact.tickets":"Resolved with high satisfaction","fact.edu":"Systems Engineering","fact.langT":"Languages","fact.lang":"Former professional interpreter","sheet.edu":"Education","sheet.eduV":"B.S. Systems Engineering, UNADECA",
     "cv":"Download CV","cv.pdf":"CV as PDF",
     "do.title":"What I do","do.meta":"customers and code",
     "do.cs":"Customer success","do.csP":"At Bevy, a SaaS platform, I own critical customer technical issues end to end: I reproduce bugs, run root cause analysis for engineering and turn support patterns into input for the product roadmap.",
@@ -416,5 +468,78 @@ footer{font-family:var(--mono);font-size:12px;color:var(--muted);display:flex;ju
 })();
 </script>
 
+<script>
+(function(){
+  document.documentElement.classList.add("js");
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var fine = window.matchMedia("(pointer: fine)").matches;
+
+  /* Barra con borde al hacer scroll */
+  var top = document.querySelector(".top");
+  function onScroll(){ top.classList.toggle("scrolled", window.scrollY > 8); }
+  window.addEventListener("scroll", onScroll, {passive:true}); onScroll();
+
+  /* Aparición al entrar en pantalla */
+  var els = document.querySelectorAll(".reveal");
+  if ("IntersectionObserver" in window && !reduce){
+    var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } }); }, {rootMargin:"0px 0px -8% 0px"});
+    els.forEach(function(el){ io.observe(el); });
+  } else { els.forEach(function(el){ el.classList.add("in"); }); }
+
+  /* Borde iluminado que sigue el cursor */
+  document.querySelectorAll(".shot").forEach(function(el){
+    el.addEventListener("pointermove", function(e){ var r = el.getBoundingClientRect();
+      el.style.setProperty("--mx", (e.clientX - r.left) + "px"); el.style.setProperty("--my", (e.clientY - r.top) + "px"); });
+  });
+
+  /* Botones magnéticos (solo mouse) */
+  if (fine && !reduce){
+    document.querySelectorAll(".btn.primary").forEach(function(b){
+      b.addEventListener("pointermove", function(e){ var r = b.getBoundingClientRect();
+        var x = (e.clientX - r.left - r.width/2) * .22, y = (e.clientY - r.top - r.height/2) * .3;
+        b.style.transform = "translate(" + x + "px," + y + "px)"; });
+      b.addEventListener("pointerleave", function(){ b.style.transform = ""; });
+    });
+  }
+
+  /* Líneas de contorno del banner, animadas lento */
+  var c = document.getElementById("lines"); if (!c) return;
+  var x = c.getContext("2d"), dpr = Math.min(window.devicePixelRatio || 1, 2), W = 0, H = 0, t = 0, raf = 0, visible = true;
+  function size(){ var r = c.getBoundingClientRect(); W = r.width; H = r.height; c.width = W * dpr; c.height = H * dpr; x.setTransform(dpr,0,0,dpr,0,0); }
+  function col(name){ return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+  function draw(){
+    x.clearRect(0,0,W,H);
+    var dark = col("--bg").toLowerCase() === "#16130f";
+    var sand = dark ? "226,196,163" : "120,82,48", copper = dark ? "217,138,82" : "168,90,40";
+    var n = 24, x0 = W * .25;
+    for (var i = 0; i < n; i++){
+      var base = H * .12 + i * (H * .76 / n);
+      x.beginPath();
+      for (var px = x0; px <= W + 10; px += 8){
+        var k = (px - x0) / (W - x0);
+        var y = base + Math.sin(px * .005 + i * .35 + t) * 30 * k + Math.sin(px * .015 + i + t * 1.6) * 7 * k - k * k * 70 + 40;
+        px === x0 ? x.moveTo(px, y) : x.lineTo(px, y);
+      }
+      var a = (0.04 + 0.16 * Math.pow(Math.sin(i / (n - 1) * Math.PI), 2)) * (dark ? 1 : .8);
+      var hi = i % 6 === 3;
+      x.strokeStyle = hi ? "rgba(" + copper + "," + (a + .22) + ")" : "rgba(" + sand + "," + a + ")";
+      x.lineWidth = hi ? 1.5 : 1; x.stroke();
+    }
+    /* desvanecer a la izquierda y abajo */
+    x.save(); x.globalCompositeOperation = "destination-out";
+    var g = x.createLinearGradient(x0, 0, x0 + W * .35, 0); g.addColorStop(0, "rgba(0,0,0,1)"); g.addColorStop(1, "rgba(0,0,0,0)");
+    x.fillStyle = g; x.fillRect(0, 0, x0 + W * .35, H);
+    var g2 = x.createLinearGradient(0, H * .7, 0, H); g2.addColorStop(0, "rgba(0,0,0,0)"); g2.addColorStop(1, "rgba(0,0,0,1)");
+    x.fillStyle = g2; x.fillRect(0, H * .7, W, H * .3); x.restore();
+  }
+  function loop(){ t += .0035; draw(); raf = visible ? requestAnimationFrame(loop) : 0; }
+  size(); draw();
+  window.addEventListener("resize", function(){ size(); draw(); });
+  if (window.matchMedia) { var mq = window.matchMedia("(prefers-color-scheme: dark)"); mq.addEventListener && mq.addEventListener("change", draw); }
+  if (!reduce){
+    new IntersectionObserver(function(es){ visible = es[0].isIntersecting; if (visible && !raf) raf = requestAnimationFrame(loop); }).observe(c);
+  }
+})();
+</script>
 </body>
 </html>
