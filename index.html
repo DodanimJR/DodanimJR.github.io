@@ -10,29 +10,29 @@
 <meta property="og:description" content="Conecto lo que el cliente necesita con lo que el equipo puede construir.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="shots/iglesia.webp">
-<meta name="theme-color" content="#4A306D">
+<meta name="theme-color" content="#16130F">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
 /* Layout: hero asimétrico (texto 1.25fr / ficha .75fr), proyectos en zig-zag con captura real, todo colapsa a una columna bajo 768px */
 :root{
-  --lavender:#E8D7F1; --thistle:#D3BCCC; --vintage:#A167A5; --indigo:#4A306D; --space:#0E273C;
-  --bg:#F6EEF9; --fg:#0E273C; --muted:#5B4A6B; --line:#D9C6DF; --frame:#FFFFFF;
-  --accent:#4A306D; --accent-ink:#F6EEF9; --accent-soft:#E8D7F1;
-  --shadow:0 24px 48px -24px rgba(74,48,109,.35);
+  --lavender:#F4EEE6; --thistle:#E2C4A3; --vintage:#C9773F; --indigo:#211C17; --space:#16130F;
+  --bg:#F6F1EA; --fg:#16130F; --muted:#6B5C4E; --line:#E3D6C6; --frame:#FFFFFF;
+  --accent:#A85A28; --accent-ink:#FBF7F2; --accent-soft:#EFE1D0;
+  --shadow:0 24px 48px -24px rgba(60,38,18,.30);
   --ease:cubic-bezier(.16,1,.3,1);
   --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
   --body:"Figtree","Segoe UI",system-ui,sans-serif;
   --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
 }
 @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
-  --bg:#0E273C; --fg:#E8D7F1; --muted:#BBA6C4; --line:#28405E; --frame:#163452;
-  --accent:#D3BCCC; --accent-ink:#0E273C; --accent-soft:#2A2F55;
+  --bg:#16130F; --fg:#F4EEE6; --muted:#B9A895; --line:#2E2720; --frame:#211C17;
+  --accent:#D98A52; --accent-ink:#16130F; --accent-soft:#2E241B;
   --shadow:0 24px 48px -24px rgba(0,0,0,.6); color-scheme:dark } }
 :root[data-theme="dark"]{
-  --bg:#0E273C; --fg:#E8D7F1; --muted:#BBA6C4; --line:#28405E; --frame:#163452;
-  --accent:#D3BCCC; --accent-ink:#0E273C; --accent-soft:#2A2F55;
+  --bg:#16130F; --fg:#F4EEE6; --muted:#B9A895; --line:#2E2720; --frame:#211C17;
+  --accent:#D98A52; --accent-ink:#16130F; --accent-soft:#2E241B;
   --shadow:0 24px 48px -24px rgba(0,0,0,.6); color-scheme:dark }
 
 *{box-sizing:border-box}
@@ -131,18 +131,18 @@ h2{font-family:var(--display);font-weight:700;font-size:clamp(28px,3.6vw,36px);l
 .visit:hover .arr{transform:translate(3px,-3px)}
 
 /* Bevy: confidencial */
-.nda{position:relative;padding:clamp(24px,4vw,40px);border-radius:20px;background:#4A306D;color:#E8D7F1;display:grid;gap:14px;overflow:hidden}
-.nda .eyebrow{color:#D3BCCC}
+.nda{position:relative;padding:clamp(24px,4vw,40px);border-radius:20px;background:#211C17;color:#F4EEE6;border:1px solid rgba(201,119,63,.35);display:grid;gap:14px;overflow:hidden}
+.nda .eyebrow{color:#E2C4A3}
 .nda h3{font-family:var(--display);font-size:clamp(24px,3.2vw,30px);margin:0;font-weight:700;line-height:1.15;text-wrap:balance;max-width:24ch}
-.nda p{margin:0;max-width:60ch;color:#D3BCCC}
+.nda p{margin:0;max-width:60ch;color:#CDBBA6}
 .declassified{display:grid;gap:10px;margin-top:8px}
-.dl-label{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#D3BCCC}
+.dl-label{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#E2C4A3}
 .redacted{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
-.redacted li{font-family:var(--mono);font-size:13px;padding:5px 12px;border-radius:4px;background:#A167A5;color:#0E273C;font-weight:500}
-.redacted li.bar{width:96px;background:#A167A5;opacity:.45}
+.redacted li{font-family:var(--mono);font-size:13px;padding:5px 12px;border-radius:4px;background:#C9773F;color:#16130F;font-weight:500}
+.redacted li.bar{width:96px;background:#C9773F;opacity:.4}
 .redacted li.bar.short{width:56px}
 .stamp{position:absolute;top:22px;right:22px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
-  border:1.5px solid #D3BCCC;padding:4px 8px;border-radius:4px;transform:rotate(4deg)}
+  border:1.5px solid #E2C4A3;color:#E2C4A3;padding:4px 8px;border-radius:4px;transform:rotate(4deg)}
 
 /* Contacto */
 .contact{display:grid;gap:22px}
